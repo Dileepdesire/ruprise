@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="navbar">
+	<h3>Shop</h3>
+	<div class="navbar-right"> <a href="/shop/new" class="btn btn-sm">Add New Shop</a> </div>
+	</div>
+
+	<table class='table'>
+		<tr>
+			<th>ID</th>
+			<th>Shop Name</th>
+			<th>Description</th>
+			<th colspan=3>Actions</th>
+			
+		</tr>
+
+		<% _.each(shop,function(shop){ %>
+		<tr data-id="<%= shop.id %>" data-model="shop">
+			<th><%= shop.id %></th>
+			<th><%= shop.shop_name %></th>
+			<th><%= shop.shop_desc %></th>
+
+
+			<th><a href="/shop/show/<%= shop.id %>" class="btn btn-sm btn-primary">Details</a></th>
+			<th><a href="/shop/edit/<%= shop.id %>" class="btn btn-sm btn-warning">Edit</a></th>
+			
+			<th>
+				<form action="/shop/destroy/<%= shop.id %>" method="POST">
+					<input type="hidden" name="_method" value="delete"/>
+					<input type="submit" class="btn btn-sm btn-danger" value="Delete"/> 
+					<input type="hidden" name="_csrf" value="<%= _csrf %>"/> 
+				</form>
+
+			</th>
+			
+		</tr>
+
+		<% }) %>
+
+	</table>
+</div>

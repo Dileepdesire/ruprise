@@ -1,0 +1,19 @@
+<div class="container">
+	<div id="rightContent">
+	<h1><%- user.name %> </h1>
+	<h3><%- user.title %> </h3>
+	<% if(user.admin) { %>
+			Admin
+			<% } else { %>
+				Operator
+			<% } %>
+	<hr>
+	<h3>Contact : <%= user.email %> </h3>
+
+	<a href="/user/edit/<%= user.id %>" class="btn btn-medium btn-primary"> Edit </a>
+    </div>
+
+    <div id="leftContent">
+    	<h2>My Shop</h2>
+    </div>
+</div>

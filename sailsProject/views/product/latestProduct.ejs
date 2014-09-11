@@ -1,0 +1,33 @@
+<div class="container">
+
+<h2>Latest Product</h2>
+<div class="productGrid">
+		<ul>
+
+		<% _.each(product,function(product){ %>
+			<li>
+			<b><%= product.prod_name %></b>
+
+			<a href="/images/uploads/<%- product.prod_image %>"><img src ="/images/uploads/thumbs/<%- product.prod_image %>" class="img-thumbnail large pull-right" ></a><br>
+			
+			
+			Price : <%= product.prod_base_price %><br>
+			
+
+			<a href="/product/show/<%= product.id %>" class="btn btn-sm btn-primary">Details</a>
+			<a href="#" class="btn btn-sm btn-warning addToCart" >Add to Cart</a>
+			
+			</li>
+
+
+
+		<% }) %>
+		</ul>
+
+
+	</div>
+
+
+</div>
+<br>
+	<a href="#">Prev</a> | <a href="/product/latestProduct/">Next</a>

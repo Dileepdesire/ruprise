@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%- title %></title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    
+    <!--  
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `link` tags, or asynchronously
+        on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+        take advantage of Sails' boilerplate asset management.
+
+        By default, stylesheets from your `assets/linker/styles` folder are included
+        here automatically.  Both CSS (.css) and LESS (.less) are supported.
+        In production, your styles will be minified and concatenated into a single file.
+        
+        To customize any part of the built-in behavior, just edit your Gruntfile.
+        For example, here are a few things you could do:
+            
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+
+    <!--STYLES-->
+    <link rel="stylesheet" href="/linker/styles/bootstrap.css">
+    <link rel="stylesheet" href="/linker/styles/custom.css">
+    <link rel="stylesheet" href="/linker/styles/dropzone.css">
+    <!--STYLES END-->
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+     $(document).ready(function(){
+         //$("#cart").text(cart) ;
+         $(".addToCart").click(function(){
+             //$(this).hide();
+           
+            var cart = parseInt($('#cart').text());
+                cart+=1;
+              $("#cart").text(cart) ;
+          
+            
+        });
+
+    }); 
+
+
+
+   
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand"><strong>RUPRISE</strong></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <% if(session.authenticated ){ %>
+              <li class="active"><a href="/user/show/<%= session.User.id %>"><%= session.User.name %></a></li>
+              <% if(session.authenticated && session.User.admin){ %>
+              <li><a href="/user">User Administration</a></li>
+              <li><a href="/product">Product Management</a></li>
+              <% } %>
+              <li><a href="/product/latestProduct/">Latest Products</a></li>
+
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">My Account <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/shop/">My Shop</a></li>
+                  <li><a href="/product/myProduct/">My Products</a></li>
+                  <li><a href="#">My Whishlist</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/file/">Media Manager</a></li>
+                </ul>
+              </li>
+
+             <% } %>
+          </ul>
+
+          <div class="navbar-right">
+
+            <% if(session.authenticated){ %>
+            <a href="/session/destroy" class="btn btn-default navbar-btn navbar-right">Sign Out</a>
+            <% } %>
+          </div>
+          <% if(!session.authenticated) { %>
+          <!-- <div class="fb-login-button" data-max-rows="3" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div> -->
+          <form action="/session/create" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" name="email" class="form-control"> 
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" name="password" class="form-control"> 
+            </div>
+            <button type="submit" class="btn btn-success">Sign In</button>
+          </form>
+          <% } %>
+
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="container">
+    <p class="pull-right">Cart : <b id="cart">0</b> Items</p>
+  </div>
+
+
+    <%- body %>
+
+    <div class="container">
+      <hr>
+      <footer class="footer">
+          <div class="pull-right">
+            <a href="http://www.santoshsah.com.np">Santosh Sah</a>
+            <div>Copyright &copy; Respect Inc, 2014. All rights reserved.</div>
+          </div>
+
+
+      </footer>
+    </div>
+
+
+    <!--
+        Client-side Templates
+        ========================
+
+    		HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/linker/templates` folder, then
+        include them here automatically.
+        
+        To customize this behavior to fit your needs, just edit your Gruntfile.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your templates using a server-side stringfile
+              before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can 
+      take advantage of Sails' boilerplate asset management.
+
+      By default, filesin your `assets/linker/js` folder are included here
+      automatically.  Both JavaScript (.js) and CoffeeScript (.coffee) are supported.
+      In production, your scripts will be minified and concatenated into a single file.
+      
+      To customize any part of the built-in behavior, just edit your Gruntfile.
+      For example, here are a few things you could do:
+          
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+    <!--SCRIPTS-->
+    <script src="/linker/js/socket.io.js"></script>
+    <script src="/linker/js/sails.io.js"></script>
+    <script src="/linker/js/app.js"></script>
+    <script src="/linker/js/jquery-1.11.1.js"></script>
+    <script src="/linker/js/jquery.validation.js"></script>
+    <script src="/linker/js/bootstrap.js"></script>
+    <script src="/linker/js/customValidate.js"></script>
+    <script src="/linker/js/dropzone.js"></script>
+    <!--SCRIPTS END-->
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+
+    // (function(d, s, id) {
+    // var js, fjs = d.getElementsByTagName(s)[0];
+    // if (d.getElementById(id)) return;
+    // js = d.createElement(s); js.id = id;
+    // js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1442309652703213&version=v2.0";
+    // fjs.parentNode.insertBefore(js, fjs);
+    // }(document, 'script', 'facebook-jssdk'));
+
+   
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<form action="/product/update/<%= product.id %>" method="POST" class="form-signin" enctype="multipart/form-data">
+	<h2>Editing Product</h2>
+	<% if(flash && flash.err) { %>
+		<ul class="alert alert-success">
+		<% Object.keys(flash.err).forEach(function(error) { %>
+			<li> <%- JSON.stringify(flash.err[error]) %> </li>
+		<% }) %>
+		</ul>
+	<% } %>
+	<input value="<%= product.prod_name %>" name="prod_name" type="text" class="form-control"/>
+	<input value="<%= product.prod_desc %>" name="prod_desc" type="text" class="form-control"/>
+	<input value="<%= product.prod_base_price %>" name="prod_base_price" type="text" class="form-control"/>
+	<input value="<%= product.prod_image %>" name="prod_image" type="file" class="form-control"/>
+	<input value="<%= session.User.id %>" name="createdBy" type="hidden" class="form-control"/>
+	
+
+		<% if(product.feature) { %>
+			<input type="hidden" name="feature" value="unchecked">
+			<label class="checkbox"><input type="checkbox" name="feature" checked>Featured</label>
+		<% } else { %>
+			<input type="hidden" name="feature" value="unchecked">
+			<label class="checkbox"><input type="checkbox" name="feature">Featured</label>
+		<% } %>
+
+
+	<input type="submit" value="Proceed" class="btn btn-lg btn-primary btn-block"/>
+	<input type="hidden" name="_csrf" value="<%= _csrf %>" />
+</form>
